@@ -3,6 +3,9 @@ var app = express();
 var router = express.Router();
 var bodyParser = require('body-parser')
 var mongoose = require('mongoose');
+const bcrypt = require('bcrypt');
+
+require('./models/db');
 
 app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
