@@ -3,6 +3,7 @@ var app = express();
 var router = express.Router();
 var bodyParser = require('body-parser')
 var mongoose = require('mongoose');
+
 const bcrypt = require('bcrypt');
 var hbs = require('hbs');
 app.set('view engine', 'hbs');
@@ -15,13 +16,14 @@ app.use(bodyParser.urlencoded({ extended: false }))
 app.use(bodyParser.json())
 
 
+var authRoutes = require('./routes/authRoute');
 
-app.get('/', (req, res, next) =>{
-    res.json('home')
-})
 
-var router1 = require('./controller/authController.js');
+app.get('/', function (req, res) {
+    res.redirect('login')
+});
 
+app.use('/', authRoutes);
 
 
 app.listen(3000,() =>{

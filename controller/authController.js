@@ -1,31 +1,45 @@
-const accountModel = require('../models/accounts.js');
+const account = require('../models/accounts')
 
 module.exports = {
-
-    getRegister: function (req, res, next){
-        res.render('/register');
+    login: function (req, res, next){
+        res.render('login');
     },
-    postRegister: async function (req, res) {
+    postLogin: function (req, res, next){
         var username = req.body.username;
         var password = req.body.password;
-        var role = req.body.role;
 
-        account.findOne({
-            username :username
+        account.findOne({ 
+            username: username,
+            password: password
         })
-        .then((data) =>{
-            if(data){
-                res.json('user da ton tai');
-            }
-            else{
-                return account.create({
-                    username :username,
-                    password :password,
-                    role :role
-                })
+        .then(data => {
+            if (data){
+                res.json('thanh cong')
+            }else{
+                res.json('that bai')
             }
         })
-    
+        .catch(error =>{
+            res.status(500).json('loi server')
+        })
+    },
+    register: function (req, res, next){
+        res.render('register');
+    },
+    postRegister: function(req, res, next){
+        var username = req.body.username
+        var password = req.body.password
 
+        account.create({
+            username: username,
+            password: password
+        })
+        .then(data =>{
+            res.json('tạo tài khoan thanh cong')
+        })
+        .catch(error=>{
+            res.status(500).json(error)
+            })
     }
+    
 }
