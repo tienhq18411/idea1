@@ -27,8 +27,8 @@ module.exports = {
         res.render('register');
     },
     postRegister: function(req, res, next){
-        var username = req.body.username
-        var password = req.body.password
+        var username = req.body.username;
+        var password = req.body.password;
 
         account.create({
             username: username,
@@ -38,7 +38,7 @@ module.exports = {
             res.json('tạo tài khoan thanh cong')
         })
         .catch(error=>{
-            res.status(500).json(error)
+            res.status(500).json('loi server')
             })
     }
     

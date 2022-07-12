@@ -3,6 +3,7 @@ var app = express();
 var router = express.Router();
 var bodyParser = require('body-parser')
 var mongoose = require('mongoose');
+var jwt = require('jsonwebtoken');
 
 const bcrypt = require('bcrypt');
 var hbs = require('hbs');
